@@ -1,0 +1,85 @@
+<div class="wrapper-md" ng-controller="cmcController">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            Responsive Table
+        </div>
+        <div class="row wrapper">
+            <div class="col-sm-5 m-b-xs">
+                <select class="input-sm form-control w-sm inline v-middle">
+        <option value="0">Bulk action</option>
+        <option value="1">Delete selected</option>
+        <option value="2">Bulk edit</option>
+        <option value="3">Export</option>
+      </select>
+                <button class="btn btn-sm btn-default">Apply</button>
+            </div>
+            <div class="col-sm-4">
+            </div>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <input type="text" class="input-sm form-control" placeholder="Search">
+                    <span class="input-group-btn">
+          <button class="btn btn-sm btn-default" type="button">Go!</button>
+        </span>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped b-t b-light">
+                <thead>
+                    <tr>
+                        <th class="col-sm-2">所属系统</th>
+                        <th class="col-sm-1">Profile</th>
+                        <th class="col-sm-2">Key</th>
+                        <th class="col-sm-4">Val</th>
+                        <th class="col-sm-1">是否加密</th>
+                        <th class="col-sm-1">
+                            <button ng-click="append()" class="btn btn-primary btn-xs">添加</button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody ng-show="!loading">
+                    <tr class="ng-scope" ng-repeat="item in list">
+                        <td ng-if="!item.isModified">{{item.appCode|dict}}</td>
+                        <td ng-if="!item.isModified">{{item.appInstanceId}}</td>
+                        <td ng-if="!item.isModified">{{item.key}}</td>
+                        <td ng-if="!item.isModified">{{item.val}}</td>
+                        <td ng-if="!item.isModified">{{item.encFlag|tfFlag}}</td>
+                        <td ng-if="!item.isModified">
+                            <button type="button" ng-click="remove(item)" class="btn btn-sm btn-icon btn-danger"><i class="fa fa-trash-o"></i></button>
+                            <button ng-click="edit(item)" class="btn btn-sm btn-icon btn-info"><i class="fa fa-edit"></i></button>
+                        </td>
+                        <td ng-if="item.isModified"><select class="form-control" ng-model="item.appCode"><option ng-repeat="(x,y) in dict['sys']" value="{{x}}">{{y.systemName}}</option>
+</select></td>
+                        <td ng-if="item.isModified"><input ng-model="item.appInstanceId" class="form-control" type="text"></td>
+                        <td ng-if="item.isModified"><input ng-model="item.key" class="form-control" type="text"></td>
+                        <td ng-if="item.isModified"><input ng-model="item.val" class="form-control" type="text"></td>
+                        <td ng-if="item.isModified"><select class="form-control" ng-model="item.encFlag" convert-to-string>
+<!--  -->
+<option ng-repeat="(x,y) in dict['tf']" value="{{x}}">{{y}}</option>
+</select></td>
+                        <td ng-if="item.isModified">
+                            <button ng-click="cancel(item)" class="btn btn-danger btn-xs ng-binding">{{lang.cancel}}</button>
+                            <button ng-click="save(item)" class="btn btn-success btn-xs ng-binding">{{lang.save}}</button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody ng-show="loading">
+                    <tr>
+                        <td colspan="6" class="text-center">Loading...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-sm-4 text-center">
+                    <small class="text-muted inline m-t-sm m-b-sm">showing 20-30 of 50 items</small>
+                </div>
+                <div class="col-sm-6 text-right pull-right">
+                    <ul uib-pagination total-items="total" ng-model="current" max-size="8" class="pagination-sm" boundary-links="true" ng-change="pageChanged()" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" style="margin:0 0 0 0"></ul>
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>

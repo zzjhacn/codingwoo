@@ -1,0 +1,69 @@
+<div class="table-responsive">
+    <table class="table table-striped b-t b-light" style="margin:0 0 0 0">
+        <thead>
+            <tr>
+                <th ng-repeat="d in columns" class="col-sm-{{d.widthRatio || '1'}}">{{d.desc || d.name}}</th>
+                <th class="col-sm-1">
+                    <button ng-click="append()" ng-if="methods.contains('C')" class="btn btn-primary btn-xs">
+                      <i class="fa fa-plus-square"></i>
+                    </button>
+                </th>
+            </tr>
+        </thead>
+        <tbody ng-show="!loading">
+            <tr class="ng-scope" ng-repeat="item in list">
+                <td ng-if="!item.editing" ng-repeat="d in columns">
+                    <span ng-if="d.list">{{item[d.name]}}</span>
+                    <span ng-if="!d.list">{{item[d.name]}}</span>
+                </td>
+                <td ng-if="!item.editing">
+                    <button ng-click="edit(item)" ng-if="methods.contains('U')" class="btn btn-sm btn-icon btn-info">
+                      <i class="fa fa-edit"></i>
+                    </button>
+                    <button type="button" ng-click="delete(item)" ng-if="methods.contains('D')" class="btn btn-sm btn-icon btn-danger">
+                      <i class="fa fa-trash-o"></i>
+                    </button>
+                </td>
+                <td ng-if="item.editing" ng-repeat="d in columns">
+                    <input ng-model="item[d.name]" ng-if="!d.doc" class="form-control" type="{{d.type || 'text'}}" min="{{d.min}}" max="{{d.max}}"></input>
+                    <select chosen ng-model="item[d.name]" allow-single-deselect="true" ng-if="d.doc && !d.multiple" class="form-control " ng-options="a for a in d.doc.value.split(',')">
+                      <option value="" ng-if="d.addBlankOption"></option>
+                    </select>
+                    <select chosen multiple data-placeholder="{{d.placeholder}}" ng-model="item[d.name]" allow-single-deselect="true" ng-if="d.doc && d.multiple" class="form-control " ng-options="a for a in d.doc.value.split(',')">
+                      <option value="" ng-if="d.addBlankOption"></option>
+                    </select>
+                </td>
+                <td ng-if="item.editing">
+                    <button ng-click="cancel(item)" class="btn btn-sm btn-icon btn-danger">
+                      <i class="fa fa-undo"></i>
+                    </button>
+                    <button ng-click="save(item)" ng-if="methods.contains('C') || methods.contains('U') " class="btn btn-sm btn-icon btn-success">
+                      <i class="fa fa-save"></i>
+                    </button>
+                </td>
+            </tr>
+        </tbody>
+        <tbody ng-show="loading">
+            <tr>
+                <td colspan="{{columns.length + 1}}" class="text-center">Loading...</td>
+            </tr>
+        </tbody>
+        <tfoot>
+            <tr>
+                <th colspan="{{columns.length + 1}}" class="text-right">
+                    <ul uib-pagination total-items="page.totalElements" items-per-page="page.size" ng-model="page.number" max-size="5" class="pagination-sm" boundary-links="true" ng-change="query()" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" style="margin:0 0 0 0"></ul>
+                    <!-- <uib-dropdown class="dropdown hidden-sm">
+                          <a href class="dropdown-toggle" uib-dropdown-toggle>
+                            {{page.size}} / page <b class="caret"></b>
+                          </a>
+                          <ul class="dropdown-menu animated fadeInDown w">
+                            <li ng-repeat="size in [10,20,50]">
+                              <a ng-click="page.size=size;query()" href>{{size}} / page</a>
+                            </li>
+                          </ul>
+                        </uib-dropdown> -->
+                </th>
+            </tr>
+        </tfoot>
+    </table>
+</div>

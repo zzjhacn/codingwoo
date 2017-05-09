@@ -1,0 +1,79 @@
+<div class="wrapper-md">
+    <toaster-container toaster-options="{'position-class': 'toast-top-right', 'close-button':true}"></toaster-container>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {{title}}
+        </div>
+        <div class="row wrapper">
+            <div class="col-sm-5 m-b-xs">
+                <select class="input-sm form-control w-sm inline v-middle">
+        <option value="0">Bulk action</option>
+        <option value="1">Delete selected</option>
+        <option value="2">Bulk edit</option>
+        <option value="3">Export</option>
+      </select>
+                <button class="btn btn-sm btn-default">Apply</button>
+            </div>
+            <div class="col-sm-4">
+            </div>
+            <div class="col-sm-3">
+                <div class="input-group">
+                    <input type="text" class="input-sm form-control" placeholder="Search">
+                    <span class="input-group-btn">
+          <button class="btn btn-sm btn-default" type="button">Go!</button>
+        </span>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-striped b-t b-light" m-check>
+                <thead>
+                    <tr>
+                        <th><input type="checkbox"></th>
+                        <th ng-repeat="d in desc">{{d.desc || d.name}}</th>
+                        <th>
+                            <button ng-click="append()" class="btn btn-primary btn-xs"><i class="fa fa-plus-square"></i></button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody ng-show="!loading">
+                    <tr class="ng-scope" ng-repeat="item in list">
+                        <td><input type="checkbox"></td>
+                        <td ng-if="!item.isModified" ng-repeat="d in desc" ng-filter="d.filter">{{d.val||item[d.name]}}</td>
+                        <td ng-if="!item.isModified">
+                            <button ng-click="edit(item)" class="btn btn-sm btn-icon btn-info"><i class="fa fa-edit"></i></button>
+                            <button type="button" ng-click="delete(item)" class="btn btn-sm btn-icon btn-danger"><i class="fa fa-trash-o"></i></button>
+                        </td>
+                        <td ng-if="item.isModified" ng-repeat="d in desc"><input ng-model="item[d.name]" class="form-control" type="text"></td>
+                        <td ng-if="item.isModified">
+                            <button ng-click="cancel(item)" class="btn btn-sm btn-icon btn-danger"><i class="fa fa-undo"></i></button>
+                            <button ng-click="resolver(item);save(item)" class="btn btn-sm btn-icon btn-success"><i class="fa fa-save"></i></button>
+                        </td>
+                    </tr>
+                </tbody>
+                <tbody ng-show="loading">
+                    <tr>
+                        <td ng-colspan="cols" class="text-center">Loading...</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <footer class="panel-footer">
+            <div class="row">
+                <div class="col-sm-12 text-right">
+                    <ul uib-pagination total-items="page.totalElements" items-per-page="page.size" ng-model="page.number" max-size="5" class="pagination-sm" boundary-links="true" ng-change="query()" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" style="margin:0 0 0 0"></ul>
+                    <!-- <uib-dropdown class="dropdown hidden-sm">
+                    <a href class="dropdown-toggle" uib-dropdown-toggle>
+                      {{page.size}} / page <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInDown w">
+                      <li ng-repeat="size in [10,20,50]">
+                        <a ng-click="page.size=size;query()" href>{{size}} / page</a>
+                      </li>
+                    </ul>
+                  </uib-dropdown> -->
+                </div>
+            </div>
+        </footer>
+    </div>
+</div>

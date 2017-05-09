@@ -1,0 +1,72 @@
+<div ng-controller='repoScannerController'>
+    <div class="bg-light lter b-b wrapper-md">
+        <div class="row">
+            <div class="col-sm-6 col-xs-12">
+                <h1 class="m-n font-thin h3 text-black">MVN</h1>
+                <small class="text-muted">Mvn viewer</small>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper-md">
+        <div class="row" ng-show="loading">
+            loading...
+        </div>
+        <div class="row" ng-show="!loading">
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <script type="text/ng-template" id="group-template.html">
+                            <div class="panel-heading">
+                                <h4 class="panel-title" style="color:#fa39c3">
+                  <a href tabindex="0" class="accordion-toggle" ng-click="toggleOpen()" uib-accordion-transclude="heading">
+                    <span uib-accordion-header ng-class="{'text-muted': isDisabled}">
+                      {{heading}}
+                    </span>
+                  </a>
+                </h4>
+                            </div>
+                            <div class="panel-collapse collapse" uib-collapse="!isOpen">
+                                <div class="panel-body" style="text-align: left" ng-transclude></div>
+                            </div>
+                        </script>
+
+                        <uib-accordion close-others="oneAtATime" ng-repeat="(k,repo) in repos">
+                            <div uib-accordion-group class="panel-default" template-url="group-template.html">
+                                <uib-accordion-heading>
+                                    {{k}} [{{repo.length}}]<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': status.isCustomHeaderOpen, 'glyphicon-chevron-right': !status.isCustomHeaderOpen}"></i>
+                                </uib-accordion-heading>
+                                <div ng-repeat="r in repo">
+                                    <label>
+                      <input type="checkbox" ng-model="r.checked" ng-change="sum(false)"></input>{{ r.fullname }} [{{ r.size/1000 }}k]
+                    </label>
+                                </div>
+                            </div>
+                        </uib-accordion>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="checkbox">
+                            <label>
+                <input type="checkbox" ng-model="oneAtATime" ></input> Open only one at a time
+              </label>
+                        </div>
+                        <div uib-alert ng-class="alert-danger">
+                            <b>{{selectedTot}}</b> selected
+                            <br>
+                            <b>{{selectedTotSize}}</b> selected <b>[{{selectedTotSize/1000}}k]</b>
+                            <br>
+                        </div>
+                        <div uib-alert ng-class="alert-success" style="scroll-y:true; height:200px;">
+                            <pre>
+{{selectedShell}}
+  </pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

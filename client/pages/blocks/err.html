@@ -1,0 +1,11 @@
+<div class="modal-header">
+    <h3 class="modal-title">服务器异常</h3>
+</div>
+<div class="modal-body text-danger">
+    {{status}} {{title}}
+    <div>{{detail}}</div>
+</div>
+<div class="modal-footer">
+    <button ng-click="report()" class="btn btn-primary">报告错误</button>
+    <button ng-click="cancel()" class="btn btn-warning">取消</button>
+</div>

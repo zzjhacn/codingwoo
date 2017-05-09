@@ -1,0 +1,32 @@
+<!-- list -->
+<ul class="nav">
+    <li class="hidden-folded padder m-t m-b-sm text-muted text-xs">
+        <span translate="aside.nav.{{app.name}}">{{app.name}}</span>
+    </li>
+    <li ng-repeat="(name,menu) in menus" ng-class="{active:$state.includes(menu.top)}">
+        <a href class="auto" uib-dropdown>
+            <span class="pull-right text-muted">
+              <i class="fa fa-fw fa-angle-right text"></i>
+              <i class="fa fa-fw fa-angle-down text-active"></i>
+            </span>
+            <i class="{{menu.icon}}"></i>
+            <span translate="aside.nav.{{name}}.self">{{label}}</span>
+        </a>
+        <ul class="nav nav-sub dk " uib-dropdown-toggle>
+            <li class="nav-sub-header">
+                <a href>
+                    <span translate="aside.nav.{{name}}.self">{{name}}</span>
+                </a>
+            </li>
+            <li ui-sref-active="active" ng-repeat="(subname,data) in menu.sub">
+                <a ui-sref="{{data.stat}}">
+                  <b class="badge {{app.settings.navbarHeaderColor}} pull-right" ng-if="data.tips">{{data.tips}}</b>
+                  <i ng-class="data.icon" ng-if="data.icon"></i>
+                    <span translate="aside.nav.{{name}}.{{subname}}">{{subname}}</span>
+                </a>
+            </li>
+        </ul>
+    </li>
+
+</ul>
+<!-- / list -->

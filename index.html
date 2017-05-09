@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="MyTools">
+
+    <head>
+        <title>MyTools</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <link rel="stylesheet" href="./node_modules/angular-ui-bootstrap/dist/ui-bootstrap-csp.css" type="text/css" />
+        <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.css" type="text/css" />
+        <link rel="stylesheet" href="./node_modules/animate.css/animate.css" type="text/css" />
+        <link rel="stylesheet" href="./node_modules/font-awesome/css/font-awesome.min.css" type="text/css" />
+        <link rel="stylesheet" href="./node_modules/simple-line-icons/css/simple-line-icons.css" type="text/css" />
+        <link rel="stylesheet" href="./node_modules/angularjs-toaster/toaster.css" type="text/css" />
+        <link rel="stylesheet" href="./node_modules/chosen-js/chosen.css" type="text/css" />
+        <link rel="stylesheet" href="css/app.css" type="text/css" />
+    </head>
+
+    <body ng-controller='mytoolsController'>
+        <div class="app" id="app" ng-class="{'app-header-fixed':app.settings.headerFixed, 'app-aside-fixed':app.settings.asideFixed, 'app-aside-folded':app.settings.asideFolded, 'app-aside-dock':app.settings.asideDock, 'container':app.settings.container}" ui-view></div>
+
+        <!-- jquery -->
+        <script src="node_modules/jquery/dist/jquery.js" charset="utf-8"></script>
+
+        <!-- Angular -->
+        <script src="./node_modules/angular/angular.js" charset="utf-8"></script>
+        <script src="./node_modules/angular-ui-router/release/angular-ui-router.js" charset="utf-8"></script>
+        <script src="./node_modules/angular-animate/angular-animate.js" charset="utf-8"></script>
+        <script src="./node_modules/angular-cookies/angular-cookies.js"></script>
+        <script src="./node_modules/easy-pie-chart/dist/angular.easypiechart.js" charset="utf-8"></script>
+
+        <!-- restangular -->
+        <!-- <script src="./node_modules/lodash/lodash.js" charset="utf-8"></script> -->
+        <!-- <script src="./node_modules/restangular/dist/restangular.js" charset="utf-8"></script> -->
+
+        <!-- lazyload -->
+        <script src="./node_modules/oclazyload/dist/ocLazyLoad.js" charset="utf-8"></script>
+
+
+        <!-- bootstrap -->
+        <script src="./node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js" charset="utf-8"></script>
+
+        <!-- chosen -->
+        <script src="./node_modules/chosen-js/chosen.jquery.js" charset="utf-8"></script>
+        <script src="./node_modules/angular-chosen/dist/chosen.js" charset="utf-8"></script>
+
+        <!-- translate -->
+        <script src="./node_modules/angular-translate/dist/angular-translate.js"></script>
+        <script src="./node_modules/angular-translate/dist/angular-translate-loader-static-files/angular-translate-loader-static-files.js"></script>
+        <script src="./node_modules/angular-translate/dist/angular-translate-storage-cookie/angular-translate-storage-cookie.js"></script>
+        <script src="./node_modules/angular-translate/dist/angular-translate-storage-local/angular-translate-storage-local.js"></script>
+
+        <!-- screenfull -->
+        <!-- <script src="./js/lib/screenfull.js/dist/screenfull.js" charset="utf-8"></script> -->
+
+        <!-- toaster -->
+        <script src="./node_modules/angularjs-toaster/toaster.js" charset="utf-8"></script>
+
+        <!-- App -->
+        <script src="js/config.ui.js" charset="utf-8"></script>
+        <script src="js/app.js" charset="utf-8"></script>
+        <script src="js/config.js" charset="utf-8"></script>
+        <!-- <script src="js/config.lazyload.js" charset="utf-8"></script> -->
+        <script src="js/config.router.js" charset="utf-8"></script>
+        <script src="js/main.js" charset="utf-8"></script>
+        <script src="js/services/ui-load.js" charset="utf-8"></script>
+        <script src="js/services/utils.js" charset="utf-8"></script>
+        <script src="js/filters/dict.filter.js" charset="utf-8"></script>
+        <script src="js/directives/ui-fullscreen.js" charset="utf-8"></script>
+        <script src="js/directives/ui-toggleclass.js" charset="utf-8"></script>
+        <script src="js/directives/ui-nav.js" charset="utf-8"></script>
+        <script src="js/directives/ui-mcheck.js" charset="utf-8"></script>
+        <script src="commons/client/angular/angular.rest.js" charset="utf-8"></script>
+        <script src="js/controllers/controllers.js" charset="utf-8"></script>
+    </body>
+
+</html>

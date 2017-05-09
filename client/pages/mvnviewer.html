@@ -1,0 +1,34 @@
+<div ng-controller='repoScannerController'>
+    <div class="bg-light lter b-b wrapper-md">
+        <div class="row">
+            <div class="col-sm-6 col-xs-12">
+                <h1 class="m-n font-thin h3 text-black">MVN</h1>
+                <small class="text-muted">Mvn viewer</small>
+            </div>
+        </div>
+    </div>
+    <div class="wrapper-md">
+        <div class="row" ng-show="loading">
+            loading...
+        </div>
+        <div class="row" ng-show="!loading">
+            <div class="col-sm-6">
+                <input type="text" name="" ng-model="kk" ng-model-options="{ updateOn: 'blur' }">
+            </div>
+            <div class="col-sm-6">
+                <div class="dd">
+                    <ol class="dd-list" ng-repeat="(k,repo) in repos | keyFilter: kk">
+                        <li class="dd-item" data-id="2">
+                            <div class="dd-handle"><span>{{k | highlight: kk}}</span></div>
+                            <ol class="dd-list">
+                                <li class="dd-item" data-id="3" ng-repeat="r in repo">
+                                    <div class="dd-handle">{{r.version}}</div>
+                                </li>
+                            </ol>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
